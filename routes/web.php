@@ -7,6 +7,8 @@ use App\Http\Controllers\profileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Categories;
+use App\Models\Meals;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +21,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    $cats = Categories::all();
+    $meals = Meals::paginate(12);
+    return view('VisitorPage',compact('cats','meals'));
 });
 
 Auth::routes();
@@ -53,3 +57,5 @@ Route::resource('/Order',orderController::class);
 Route::get('/profile/{id}',[profileController::class,'index'])->name('profile.show');
 Route::put('/update/{id}',[profileController::class,'update'])->name('profile.update');
 
+// Orders
+Route::get('/Orders',[orderController::class,'index'])->name('Order.show');

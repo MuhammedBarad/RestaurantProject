@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\cr;
-use Illuminate\Http\Request;
+use App\Models\orders;
 
+use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 class orderController extends Controller
 {
     /**
@@ -16,7 +18,8 @@ class orderController extends Controller
     }
     public function index()
     {
-        return view('Order.index');
+        $orders = orders::paginate(13);
+        return view('Order.index',compact('orders'));
     }
 
     /**

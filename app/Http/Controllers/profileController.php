@@ -52,4 +52,7 @@ class profileController extends Controller
         $message = 'Profile Updated successfuly';
         return redirect('/profile/'.$id)->with('success', $message);
     }
+
 }
+
+

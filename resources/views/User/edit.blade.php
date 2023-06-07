@@ -17,12 +17,12 @@
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">User Name :</label>
-            <input value="{{ Auth()->user()->name }}" type="text" name="name" class="form-control" id="exampleInputEmail1"
+            <input value="{{ $users->name }}" type="text" name="name" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email :</label>
-            <input value="{{ Auth()->user()->email }}" disabled type="email" name="email" class="form-control" id="exampleInputEmail1"
+            <input value="{{ $users->email }}" disabled type="email" name="email" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>

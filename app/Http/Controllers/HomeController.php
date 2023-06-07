@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Categories;
+use App\Models\Meals;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 class HomeController extends Controller
 {
     /**
@@ -21,8 +24,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $cats = Categories::all();
+        if(Auth()->user()->is_admin == 1){
+            $users = User::paginate(13);
+            return view('User.index',compact('users'));
+        }
+        else{
+            if(!$request->category){
+
+                $meals = Meals::paginate(12);
+                return view('UserPage',compact('cats','meals'));
+            }else{
+                $meals = Meals::where('category',$request->category)->paginate('6');
+                return view('UserPage',compact('cats','meals'));
+            }
+        }
+
     }
 }
